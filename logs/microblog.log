@@ -67,3 +67,4 @@ WHERE user.id = ?]
 [parameters: (2,)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
 2021-11-23 16:39:05,665 INFO: Microblog startup [in C:\Users\abhij\flask-microblog-abhi\app\__init__.py:82]
+2021-11-23 16:42:11,160 INFO: Microblog startup [in C:\Users\abhij\flask-microblog-abhi\app\__init__.py:82]
