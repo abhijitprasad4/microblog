@@ -1,4 +1,4 @@
-2021-11-15 13:59:57,192 ERROR: Exception on /index [POST] [in C:\Users\abhij\microblog\venv\lib\site-packages\flask\app.py:1457]
+2021-11-15 14:01:56,559 ERROR: Exception on /search [GET] [in C:\Users\abhij\microblog\venv\lib\site-packages\flask\app.py:1457]
 Traceback (most recent call last):
   File "C:\Users\abhij\microblog\venv\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
     conn = connection.create_connection(
@@ -39,7 +39,7 @@ Traceback (most recent call last):
     conn = self._new_conn()
   File "C:\Users\abhij\microblog\venv\lib\site-packages\urllib3\connection.py", line 186, in _new_conn
     raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000002874E38F0A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000287539615E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
 
 During handling of the above exception, another exception occurred:
 
@@ -54,22 +54,15 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "C:\Users\abhij\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "C:\Users\abhij\microblog\app\main\routes.py", line 36, in index
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "C:\Users\abhij\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1428, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "C:\Users\abhij\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 839, in commit
-    self.session.dispatch.after_commit(self.session)
-  File "C:\Users\abhij\microblog\venv\lib\site-packages\sqlalchemy\event\attr.py", line 256, in __call__
-    fn(*args, **kw)
-  File "C:\Users\abhij\microblog\app\models.py", line 36, in after_commit
-    add_to_index(obj.__tablename__, obj)
-  File "C:\Users\abhij\microblog\app\search.py", line 10, in add_to_index
-    current_app.elasticsearch.index(index=index, id=model.id, body=payload)
+  File "C:\Users\abhij\microblog\app\main\routes.py", line 153, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+  File "C:\Users\abhij\microblog\app\models.py", line 15, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "C:\Users\abhij\microblog\app\search.py", line 22, in query_index
+    search = current_app.elasticsearch.search(
   File "C:\Users\abhij\microblog\venv\lib\site-packages\elasticsearch\client\utils.py", line 301, in _wrapped
     return func(*args, params=params, headers=headers, **kwargs)
-  File "C:\Users\abhij\microblog\venv\lib\site-packages\elasticsearch\client\__init__.py", line 405, in index
+  File "C:\Users\abhij\microblog\venv\lib\site-packages\elasticsearch\client\__init__.py", line 1765, in search
     return self.transport.perform_request(
   File "C:\Users\abhij\microblog\venv\lib\site-packages\elasticsearch\transport.py", line 409, in perform_request
     self._do_verify_elasticsearch(headers=headers, timeout=timeout)
@@ -79,4 +72,8 @@ Traceback (most recent call last):
     _, info_headers, info_response = conn.perform_request(
   File "C:\Users\abhij\microblog\venv\lib\site-packages\elasticsearch\connection\http_urllib3.py", line 276, in perform_request
     raise ConnectionError("N/A", str(e), e)
-elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x000002874E38F0A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x000002874E38F0A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it)
+elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x00000287539615E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000287539615E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it)
+2021-11-15 14:10:05,574 INFO: Microblog startup [in C:\Users\abhij\microblog\app\__init__.py:77]
+2021-11-15 14:18:08,703 INFO: Microblog startup [in C:\Users\abhij\microblog\app\__init__.py:77]
+2021-11-15 14:18:23,520 INFO: Microblog startup [in C:\Users\abhij\microblog\app\__init__.py:77]
+2021-11-15 14:19:04,160 INFO: Microblog startup [in C:\Users\abhij\microblog\app\__init__.py:77]
